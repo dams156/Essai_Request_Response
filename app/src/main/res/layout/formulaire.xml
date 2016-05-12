@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/im"
+              android:gravity="center_horizontal"
+
+>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_margin="5dp"
+
+    >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+
+    >
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Nom"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:gravity="center"
+
+        />
+        <EditText
+                android:id="@+id/viewnom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:gravity="center"
+        >
+
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+
+    >
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Lieu"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:gravity="center"
+        />
+        <EditText
+                android:id="@+id/viewlieu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:gravity="center"
+        >
+
+        </EditText>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+    >
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Quantité"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:gravity="center"
+        />
+        <EditText
+                android:id="@+id/viewquantite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:gravity="center"
+        >
+
+        </EditText>
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+    >
+    <TextView
+            android:id="@+id/viewdata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+    </TextView>
+    <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonupdate"
+            android:text="Mise a jour stock"
+            android:onClick="updateStock"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"
+            android:textColor="#000000"
+    />
+    <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttoninsert"
+            android:text="Insérer en stock"
+            android:onClick="insertStock"
+            android:background="@drawable/button"
+            android:layout_margin="5dp"
+            android:textColor="#000000"
+    />
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:gravity="right"
+
+    >
+        <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:src="@drawable/mongobox"
+
+
+        />
+    </LinearLayout>
+
+</LinearLayout>
