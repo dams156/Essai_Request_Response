@@ -23,9 +23,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".Web_Service">
+
         </activity>
         <activity android:name=".GeneratecodeAvtivity">
 
+        </activity>
+        <activity android:name=".MainCreationProduit">
 
         </activity>
     </application>

@@ -9,9 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
@@ -20,7 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
-
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -38,11 +39,14 @@ public class Web_Service extends AppCompatActivity{
     public static final String ENCODING = "UTF-8";
     public String produit;
     int valeurbase,valeurupdate;
+    ListView listeessai;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.formulaire);
+
 
         intent=getIntent();
         produit=intent.getStringExtra("code");
@@ -50,7 +54,9 @@ public class Web_Service extends AppCompatActivity{
         viewnom= (EditText) findViewById(R.id.viewnom);
         viewlieu= (EditText) findViewById(R.id.viewlieu);
         viewquantite= (EditText) findViewById(R.id.viewquantite);
+        listeessai= (ListView) findViewById(R.id.listitem);
         DisplayProduct();
+
     }
 
 
@@ -81,8 +87,8 @@ public class Web_Service extends AppCompatActivity{
                             String result2 = jsonObject.toString();
 
                             Log.e("onsuccess", "result2" + result2);
-
-                            //viewdata.setText(jsonObject.toString(INDENT_SPACES));
+                            ajouterListe(jsonObject);
+                            viewdata.setText(jsonObject.toString(INDENT_SPACES));
                             //JSONObject json = (JSONObject) jarray.get(0);
                             Log.e("onsuccess", "json: " + jsonObject);
 
@@ -234,6 +240,31 @@ public class Web_Service extends AppCompatActivity{
                 Log.e("REQUEST FAILURE", "status: "+ statusCode);
             }
         });
+
+
+    }
+    public void ajouterListe(JSONObject json){
+
+        Iterator iterator=json.keys();
+
+        ArrayList arraylist=new ArrayList();
+
+        while(iterator.hasNext()){
+            Object element = iterator.next();
+            Log.e("ajouterListe","key: "+element);
+
+            arraylist.add(element.toString());
+        }
+
+        String[] mStrings = {
+                "AAAAAAAA", "BBBBBBBB", "CCCCCCCC", "DDDDDDDD", "EEEEEEEE",
+                "FFFFFFFF", "GGGGGGGG", "HHHHHHHH", "IIIIIIII", "JJJJJJJJ",
+                "ZZZZZZZZ"
+        };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(Web_Service.this,
+                android.R.layout.simple_list_item_1, arraylist);
+        listeessai.setAdapter(adapter);
 
 
     }

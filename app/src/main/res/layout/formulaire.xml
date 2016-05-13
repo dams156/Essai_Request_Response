@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@drawable/im"
+              android:background="#A7A8A8"
               android:gravity="center_horizontal"
 
 >
@@ -24,6 +25,7 @@
             android:layout_margin="5dp"
 
     >
+
         <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -33,6 +35,7 @@
                 android:gravity="center"
 
         />
+
         <EditText
                 android:id="@+id/viewnom"
                 android:layout_width="0dp"
@@ -95,11 +98,18 @@
 
         </EditText>
     </LinearLayout>
+
+        <ListView
+                android:id="@+id/listitem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        </ListView>
     </LinearLayout>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:orientation="vertical"
             android:gravity="center"
     >
