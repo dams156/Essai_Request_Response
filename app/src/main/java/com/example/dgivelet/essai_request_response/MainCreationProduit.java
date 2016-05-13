@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class MainCreationProduit extends AppCompatActivity{
 
-    //COUCOU
     ListView listeessai;
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
