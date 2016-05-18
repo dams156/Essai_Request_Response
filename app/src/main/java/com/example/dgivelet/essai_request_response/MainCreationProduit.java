@@ -34,7 +34,7 @@ public class MainCreationProduit extends AppCompatActivity{
                 "ZZZZZZZZ"
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainCreationProduit.this,
-                android.R.layout.simple_list_item_1, mStrings);
+                R.layout.framelayout, mStrings);
         listeessai.setAdapter(adapter);
 
 

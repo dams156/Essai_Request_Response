@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
@@ -18,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,8 +48,6 @@ public class Web_Service extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.formulaire);
-
-
         intent=getIntent();
         produit=intent.getStringExtra("code");
         viewdata= (TextView) findViewById(R.id.viewdata);
@@ -56,18 +56,54 @@ public class Web_Service extends AppCompatActivity{
         viewquantite= (EditText) findViewById(R.id.viewquantite);
         listeessai= (ListView) findViewById(R.id.listitem);
         DisplayProduct();
-
+        recupererCategorie();
     }
+    /*
+    * Methode pour recuperer les champs des différentes categories
+    * le nom de la categorie est envoyer dans l URL
+    * */
 
+    public void recupererCategorie(){
 
+        String newurl ="http://10.0.2.2:8080/RestMongo-1.0-SNAPSHOT/webresources/produit/categorie/table";
+        AsyncHttpClient client=new AsyncHttpClient();
+
+        RequestHandle handle = client.get(newurl, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String str = null;
+                try {
+                    str = new String(responseBody, ENCODING);
+                    JSONObject jsonObject = new JSONObject(str);
+                    viewdata.setText(jsonObject.toString(INDENT_SPACES));
+                    Log.e("onsuccess", "json: " + jsonObject);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
+    /*
+    *   Methodes pour recuperer un produit
+    *   identification par le nom ou le code envoyé par le QRcode ou code barre et envoyé dans l URL
+    */
     public void DisplayProduct() {
 
-            String newurl ="http://pc872:8085/ProjetStageAfpaAlteca2016-1.0-SNAPSHOT/webresources/produit/get/"+ produit;
-            //String newurl ="http://10.0.2.2:8080/RestMongo-1.0-SNAPSHOT/webresources/produit/get/"+ produit;
+            //String newurl ="http://pc872:8085/ProjetStageAfpaAlteca2016-1.0-SNAPSHOT/webresources/produit/get/"+ produit;
+            String newurl ="http://10.0.2.2:8080/RestMongo-1.0-SNAPSHOT/webresources/produit/get/"+ produit;
             Log.e("DisplaProduct","newurl:"+newurl );
 
             AsyncHttpClient client = new AsyncHttpClient();
-            RequestHandle handle = client.get(newurl, new AsyncHttpResponseHandler() {
+
+        RequestHandle handle = client.get(newurl, new AsyncHttpResponseHandler() {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -88,7 +124,7 @@ public class Web_Service extends AppCompatActivity{
 
                             Log.e("onsuccess", "result2" + result2);
                             ajouterListe(jsonObject);
-                            viewdata.setText(jsonObject.toString(INDENT_SPACES));
+                            //viewdata.setText(jsonObject.toString(INDENT_SPACES));
                             //JSONObject json = (JSONObject) jarray.get(0);
                             Log.e("onsuccess", "json: " + jsonObject);
 
@@ -96,6 +132,7 @@ public class Web_Service extends AppCompatActivity{
                             viewlieu.setText(jsonObject.get("lieu").toString());
                             viewquantite.setText(jsonObject.get("quantite").toString());
                             valeurbase = Integer.parseInt(viewquantite.getText().toString());
+
                         }   catch (NullPointerException e){
 
                             new AlertDialog.Builder(Web_Service.this)
@@ -245,6 +282,10 @@ public class Web_Service extends AppCompatActivity{
     }
     public void ajouterListe(JSONObject json){
 
+        Gson gson=new Gson();
+        gson.toJson(json);
+        Log.e("ajouterliste", "gson: "+gson.toString() );
+
         Iterator iterator=json.keys();
 
         ArrayList arraylist=new ArrayList();
@@ -252,20 +293,13 @@ public class Web_Service extends AppCompatActivity{
         while(iterator.hasNext()){
             Object element = iterator.next();
             Log.e("ajouterListe","key: "+element);
-
             arraylist.add(element.toString());
         }
 
-        String[] mStrings = {
-                "AAAAAAAA", "BBBBBBBB", "CCCCCCCC", "DDDDDDDD", "EEEEEEEE",
-                "FFFFFFFF", "GGGGGGGG", "HHHHHHHH", "IIIIIIII", "JJJJJJJJ",
-                "ZZZZZZZZ"
-        };
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(Web_Service.this,
                 android.R.layout.simple_list_item_1, arraylist);
-        listeessai.setAdapter(adapter);
 
+        listeessai.setAdapter(adapter);
 
     }
 }

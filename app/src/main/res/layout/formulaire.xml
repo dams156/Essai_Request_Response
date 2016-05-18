@@ -113,12 +113,14 @@
             android:orientation="vertical"
             android:gravity="center"
     >
+        <ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">
     <TextView
             android:id="@+id/viewdata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
     </TextView>
+        </ScrollView>
     <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
